@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Countdown sadboi</title>
+
+    <link rel="stylesheet" href="css/firework.css">
+</head>
+<body>
+    <video controls autoplay id="audio-lofi" name="media" style="display: none;">
+        <source src="your_music" type="audio/mpeg" />
+    </video>
+
+    <h1 id="timer" style="margin: 0;position: absolute;top: 50%;left: 50%;margin-right: -50%;transform: translate(-50%, -50%);color: white;font-size: 400%;">></h1>
+    
+    <div id="inner" style="display: none;margin: 0;position: absolute;top: 50%;left: 50%;margin-right: -50%;transform: translate(-50%, -50%);color: white;">
+        <div class="pyro">
+            <h1> Happy new decade</h1>
+            <h2 style="text-align: center;">2020</h2>
+            <div class="before"></div>
+            <div class="after"></div>
+        </div>
+    </div>
+</body>
+
+<script>
+var mySoundObject = new Audio('music/your_music.mp3');
+
+
+var countdown = new Date("Jan 01, 2020 00:00:00").getTime();
+var check = setInterval(function() {
+
+    var today = new Date().getTime();
+    var dist = countdown - today;
+    var days = Math.floor(dist / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((dist % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((dist % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((dist % (1000 * 60)) / 1000);
+
+    document.getElementById("timer").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+
+    if (dist < 0) {
+        clearInterval(check);
+        var shw = document.getElementById("inner");
+        var myvid = document.getElementById("audio-lofi");
+
+        shw.style.display = "block";
+
+        document.getElementById("timer").style.display = "none";
+        document.getElementById("audio-lofi").pause();
+        mySoundObject.play();
+    }
+}, 1000);
+
+</script>
+</html>
